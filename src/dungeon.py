@@ -15,8 +15,7 @@ class Dungeon:
 
     def next_encounter(self, player: Player):
         """
-        Runs one floor's encounter.
-        TODO: expand this — e.g. random chance of a rest room, treasure room, or ambush.
+        Runs one floor's encounter. For now, each floor just has one monster encounter, but this can be expanded with traps, puzzles, shops, etc.
         """
         print(f"\n=== Floor {self.floor} of {TOTAL_FLOORS} ===")
 
@@ -29,5 +28,6 @@ class Dungeon:
 
     def _spawn_monster(self):
         """Randomly selects a monster type and creates an instance of it."""
-        monster_func = random.choice(list(MONSTER_TYPES.values()))
+        monster_types = random.choice(list(MONSTER_TYPES.values()))
+        monster_func = random.choice(monster_types)
         return monster_func()
