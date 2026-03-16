@@ -80,6 +80,8 @@ class Player:
     def show_status(self):
         print(f"\n--- {self.name} | Level {self.level} ---")
         print(f"  HP:     {self.hp}/{self.max_hp}")
-        print(f"  ATK:    {self.attack}  DEF: {self.defense}")
+        print(f"  ATK:    {self.attack}  ")
+        print(f"  DEF:    {self.defense}")
         print(f"  XP:     {self.xp}/{self.xp_to_level}")
-        print(f"  Weapon: {self.equipment['weapon'].name} | Armor: {self.equipment['armor'].name}")
+        print(f"  Weapon: {self.equipment['weapon'].name}") 
+        print(f"  Armor:  {self.equipment['armor'].name}")
