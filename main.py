@@ -1,3 +1,5 @@
+import subprocess
+
 from src.player import Player
 from src.dungeon import Dungeon
 
@@ -27,20 +29,22 @@ def main():
     #         break
     #     else:
     #         print("That wasn't an option you cheeky dog. Please enter Easy, Medium, or Hard.")
-    difficulty = "Medium" # TODO: remove this hardcoding after testing
+    difficulty = "medium" # TODO: remove this hardcoding after testing
 
     # Initialize Player and Dungeon Objects
     player = Player(name, difficulty)
     dungeon = Dungeon()
 
     # Main Loop: runs until player dies, completes the dungeon, or flees (TODO)
-    choice = input("Are you ready to enter the dungeon? Y/N : ")
+    # choice = input("Are you ready to enter the dungeon? Y/N : ")
+    choice = "Y" # TODO: remove this hardcoding after testing
     if choice.capitalize() == "Y":
         player.show_status()
         print("\nEntering the dungeon...")
-        while player.is_alive() and not dungeon.is_complete():
+        while player.is_alive() and not dungeon.is_complete() and not player.fled():
             dungeon.next_encounter(player)
-            if player.is_alive():
+            if player.is_alive() and not player.fled():
+                # subprocess.run("cls",shell=True) # Clear the console after each encounter for better readability (TODO: make this cross-platform compatible)
                 player.show_status()
     else:
         print(f"\nFarewell, {player.name}. The pointless quest awaits... when you're ready.")
