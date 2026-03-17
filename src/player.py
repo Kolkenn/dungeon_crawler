@@ -18,6 +18,8 @@ class Player:
         } # Dict of equipped items, can be expanded with equipment system
         self._stat_and_gear_setup(difficulty)
 
+        self.fled_status = False # Track if player has fled from combat (TODO: implement fleeing mechanics)
+
     def _stat_and_gear_setup(self, difficulty: str):
         """Sets initial stats and gear based on chosen difficulty."""
         match difficulty.lower():
@@ -42,6 +44,10 @@ class Player:
     def is_alive(self) -> bool:
         """Returns True if player is alive (hp > 0), False otherwise."""
         return self.hp > 0
+    
+    def fled(self) -> bool:
+        """Returns True if player has fled from combat, False otherwise."""
+        return self.fled_status
 
     def take_damage(self, amount: int):
         """Calculates damage taken after defense, reduces hp, and returns actual damage taken."""
@@ -50,8 +56,8 @@ class Player:
         self.hp = max(0, self.hp - actual)
         return actual  # return actual damage taken (useful for combat messages)
     
-    def deal_damage(self) -> int:
-        """Calculates damage dealt based on attack stat and equipped weapon."""
+    def attack_strength(self) -> int:
+        """Calculates attack strength based on attack stat and equipped weapon."""
         weapon_bonus = self.equipment["weapon"].attack_bonus if self.equipment["weapon"] else 0
         return self.attack + weapon_bonus
 
@@ -83,5 +89,5 @@ class Player:
         print(f"  ATK:    {self.attack}  ")
         print(f"  DEF:    {self.defense}")
         print(f"  XP:     {self.xp}/{self.xp_to_level}")
-        print(f"  Weapon: {self.equipment['weapon'].name}") 
-        print(f"  Armor:  {self.equipment['armor'].name}")
+        print(f"  Weapon: {self.equipment['weapon'].name} (+{self.equipment['weapon'].attack_bonus} ATK)" if self.equipment['weapon'] else "  Weapon: None") 
+        print(f"  Armor:  {self.equipment['armor'].name} (+{self.equipment['armor'].defense_bonus} DEF)" if self.equipment['armor'] else "  Armor: None")
