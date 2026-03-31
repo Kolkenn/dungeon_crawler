@@ -55,7 +55,7 @@ def player_attack(player: Player, monster: Monster):
         damage *= 2
     damage_taken = monster.take_damage(damage)
     if damage_taken == 0:
-        print(f"  You rolled {player_hit_roll} - hits! Your {player.equipment['weapon'].name} hits the {monster.species} for {damage} damage but {monster.no_damage_message} ({monster.hp}/{monster.max_hp} HP)")
+        print(f"  You rolled {player_hit_roll} - hits! However, {monster.no_damage_message} ({monster.hp}/{monster.max_hp} HP)")
     else:
         print(f"  You rolled {player_hit_roll} - hits! Your {player.equipment['weapon'].name} hits the {monster.species} for {damage_taken} damage. ({monster.hp}/{monster.max_hp} HP)")
 
