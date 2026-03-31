@@ -66,8 +66,14 @@ def main():
             player.show_status()
 
     # 3. Post-Game Logic
-    # This executes once the while loop terminates (due to death, victory, or fleeing).
-    print("\n")
+    if not player.is_alive():
+        print(f"\nAlas, {player.name} has met their demise in the depths of the dungeon. Better luck next time!")
+    elif dungeon.is_complete():
+        print(f"\nCongratulations, {player.name}! You have successfully completed the dungeon and emerged victorious! Your name will be remembered by no one as the hero who accomplished nothing of note, but hey, you did it!")
+    elif player.fled():
+        print(f"\n{player.name} has fled the dungeon. Sometimes discretion is the better part of valor, but the quest remains incomplete. Maybe next time!")
+
+    sys.exit(0) # Exit the program with a zero status to indicate successful completion of the game loop, regardless of the outcome.
 
 
 if __name__ == "__main__":
