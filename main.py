@@ -5,10 +5,11 @@ from src.dungeon import Dungeon
 
 
 def main():
-    print("==============================================")
+    print("="* 40)
     print("       YE OLDE POINTLESS QUEST")
     print("   A Journey of Negligible Importance")
-    print("==============================================\n")
+    print("="* 40)
+    print("\n")
     
     # Name input loop with validation to prevent empty names
     # while True:
