@@ -57,6 +57,10 @@ def main():
     print("\nEntering the dungeon...")
     while player.is_alive() and not dungeon.is_complete() and not player.fled():
         dungeon.next_encounter(player)
+
+        if dungeon.is_complete() or player.fled():
+            break
+
         if player.is_alive() and not player.fled():
             # subprocess.run("cls",shell=True) # Clear the console after each encounter for better readability (TODO: make this cross-platform compatible)
             player.show_status()
