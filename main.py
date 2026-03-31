@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 from src.player import Player
 from src.dungeon import Dungeon
@@ -36,19 +37,33 @@ def main():
     player = Player(name, difficulty)
     dungeon = Dungeon()
 
+    # Validation loop to confirm player is ready to enter the dungeon, with input validation
+    while True:
+        # choice = input("Are you ready to enter the dungeon? Y/N : ")
+        choice = "N" # TODO: remove this hardcoding after testing
+        match choice.capitalize():
+            case "Y":
+                # The player is ready. Break the validation loop to proceed to the game loop.
+                break
+            case "N":
+                print(f"\nFarewell, {player.name}. The pointless quest awaits... when you're ready.")
+                sys.exit(1) # Exit the program with a non-zero status to indicate it was intentional but not a successful start.
+            case _:
+                # Invalid input. The loop continues and prompts the user again.
+                print("That wasn't an option you cheeky dog. Please enter Y or N.")
+
     # Main Loop: runs until player dies, completes the dungeon, or flees (TODO)
-    # choice = input("Are you ready to enter the dungeon? Y/N : ")
-    choice = "Y" # TODO: remove this hardcoding after testing
-    if choice.capitalize() == "Y":
-        player.show_status()
-        print("\nEntering the dungeon...")
-        while player.is_alive() and not dungeon.is_complete() and not player.fled():
-            dungeon.next_encounter(player)
-            if player.is_alive() and not player.fled():
-                # subprocess.run("cls",shell=True) # Clear the console after each encounter for better readability (TODO: make this cross-platform compatible)
-                player.show_status()
-    else:
-        print(f"\nFarewell, {player.name}. The pointless quest awaits... when you're ready.")
+    player.show_status()
+    print("\nEntering the dungeon...")
+    while player.is_alive() and not dungeon.is_complete() and not player.fled():
+        dungeon.next_encounter(player)
+        if player.is_alive() and not player.fled():
+            # subprocess.run("cls",shell=True) # Clear the console after each encounter for better readability (TODO: make this cross-platform compatible)
+            player.show_status()
+
+    # 3. Post-Game Logic
+    # This executes once the while loop terminates (due to death, victory, or fleeing).
+    print("\n")
 
 
 if __name__ == "__main__":
