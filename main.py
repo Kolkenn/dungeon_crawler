@@ -39,9 +39,9 @@ def main():
 
     # Validation loop to confirm player is ready to enter the dungeon, with input validation
     while True:
-        # choice = input("Are you ready to enter the dungeon? Y/N : ")
-        choice = "N" # TODO: remove this hardcoding after testing
-        match choice.capitalize():
+        # choice = input("Are you ready to enter the dungeon? Y/N : ").strip().upper()
+        choice = "Y" # TODO: remove this hardcoding after testing
+        match choice:
             case "Y":
                 # The player is ready. Break the validation loop to proceed to the game loop.
                 break
